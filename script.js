@@ -9,7 +9,8 @@ function Book(title, author, number_of_pages, read = false) {
   this.author = author;
   this.number_of_pages = number_of_pages;
   this.read = read;
-  this.color = "#" + ((1 << 24) * Math.random() | 0).toString(16).padStart(6, "0");
+  this.color =
+    "#" + (((1 << 24) * Math.random()) | 0).toString(16).padStart(6, "0");
 }
 
 function addBookToLibrary(title, author, number_of_pages, read = false) {
@@ -19,6 +20,10 @@ function addBookToLibrary(title, author, number_of_pages, read = false) {
 
 function displayBooks() {
   const shelf = document.getElementsByClassName("shelf")[0]; //TODO choose the best shelf
+
+  while (shelf.firstChild) {
+    shelf.removeChild(shelf.lastChild);
+  }
 
   myLibrary.forEach((b) => {
     let div_book = document.createElement("div");
@@ -54,3 +59,21 @@ for (let s of shelfs) {
     s.appendChild(dragged_book);
   });
 }
+
+const add_book_form = document.getElementById("add-book-form");
+const add_book_dialog = document.getElementById("add-book-dialog");
+add_book_form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const data = new FormData(e.target);
+
+  addBookToLibrary(
+    data.get("title"),
+    data.get("author"),
+    data.get("number-of-page"),
+    data.get("read-it"),
+  );
+
+  displayBooks();
+
+  add_book_dialog.close();
+});
