@@ -1,3 +1,43 @@
+const myLibrary = [];
+
+function Book(title, author, number_of_pages, read = false) {
+  if (!new.target) {
+    throw Error("You must use the 'new' operator to call the constructor");
+  }
+  this.id = crypto.randomUUID();
+  this.title = title;
+  this.author = author;
+  this.number_of_pages = number_of_pages;
+  this.read = read;
+  this.color = "#" + ((1 << 24) * Math.random() | 0).toString(16).padStart(6, "0");
+}
+
+function addBookToLibrary(title, author, number_of_pages, read = false) {
+  let book = new Book(title, author, number_of_pages, read);
+  myLibrary.push(book);
+}
+
+function displayBooks() {
+  const shelf = document.getElementsByClassName("shelf")[0]; //TODO choose the best shelf
+
+  myLibrary.forEach((b) => {
+    let div_book = document.createElement("div");
+    div_book.draggable = true;
+    div_book.classList.add("book");
+    div_book.style.backgroundColor = b.color;
+    div_book.innerText = `${b.title}\n${b.author}`;
+    div_book.title = `${b.number_of_pages} page${b.number_of_pages > 1 ? "s" : ""}\n${b.read ? "Read" : "Not Read"}`;
+
+    shelf.appendChild(div_book);
+  });
+}
+
+addBookToLibrary("The Lord of the Rings", "J.R.R Tolkien", 1000);
+addBookToLibrary("Harry Potter", "J.K Rowling", 250, true);
+addBookToLibrary("1984", "Georges Orwell", 420, true);
+
+displayBooks();
+
 let dragged_book;
 
 shelfs = document.getElementsByClassName("shelf");

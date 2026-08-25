@@ -102,18 +102,6 @@ dialog {
   filter: brightness(80%);
 }
 
-#the-lord-of-the-ring {
-  background-color: blue;
-}
-
-#harry-potter {
-  background-color: red;
-}
-
-#orwell-1984 {
-  background-color: orange;
-}
-
 .add-book-button {
   grid-row: 2;
   grid-column: 2;
