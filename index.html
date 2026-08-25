@@ -6,13 +6,23 @@
     <title>Odin Library</title>
     <script src="script.js" defer></script>
     <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Faculty+Glyphic&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <header>
       <h1>My Library</h1>
     </header>
     <main>
-      <button command="show-modal" commandfor="add-book-dialog">
+      <button
+        class="add-book-button"
+        command="show-modal"
+        commandfor="add-book-dialog"
+      >
         Add book
       </button>
 
@@ -32,7 +42,19 @@
       </dialog>
 
       <div class="bookshelfs">
-        <div class="books"></div>
+        <div class="shelf">
+          <div id="the-lord-of-the-ring" class="book">
+            The Lord of the ring<br />J.R.R Tolkien
+          </div>
+          <div id="harry-potter" class="book">
+            Harry Potter <br />J.K Rowling
+          </div>
+          <div id="orwell-1984" class="book">1984 <br />Georges Orwell</div>
+        </div>
+        <div class="shelf"></div>
+        <div class="shelf"></div>
+        <div class="shelf"></div>
+        <div class="shelf"></div>
       </div>
     </main>
     <footer>
@@ -40,7 +62,7 @@
         A project from
         <a
           href="https://www.theodinproject.com/lessons/node-path-javascript-library"
-          >The Odin Project</a
+          >The Odin Project.</a
         >
       </p>
     </footer>
