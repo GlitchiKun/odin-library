@@ -37,19 +37,21 @@
           <label for="read">Already read it ?</label>
           <input type="checkbox" name="read-it" id="read-it" />
         </form>
-        <button type="summit" form="add-book-form">Add</button>
-        <button command="close" commandfor="add-book-dialog">Cancel</button>
+        <div class="buttons">
+          <button type="summit" form="add-book-form">Add</button>
+          <button command="close" commandfor="add-book-dialog">Cancel</button>
+        </div>
       </dialog>
 
       <div class="bookshelfs">
         <div class="shelf">
-          <div id="the-lord-of-the-ring" class="book">
+          <div id="the-lord-of-the-ring" class="book" draggable="true">
             The Lord of the ring<br />J.R.R Tolkien
           </div>
-          <div id="harry-potter" class="book">
+          <div id="harry-potter" class="book" draggable="true">
             Harry Potter <br />J.K Rowling
           </div>
-          <div id="orwell-1984" class="book">1984 <br />Georges Orwell</div>
+          <div id="orwell-1984" class="book" draggable="true">1984 <br />Georges Orwell</div>
         </div>
         <div class="shelf"></div>
         <div class="shelf"></div>
