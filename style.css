@@ -105,6 +105,7 @@ dialog {
   writing-mode: sideways-lr;
   padding: 4px 2px;
   border-radius: 2px;
+  font-size: 100%;
 }
 
 .book:hover {

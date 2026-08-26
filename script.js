@@ -12,10 +12,15 @@ function Book(title, author, number_of_pages, read = false) {
   this.is_read = read;
   this.color =
     "#" + (((1 << 24) * Math.random()) | 0).toString(16).padStart(6, "0");
+  this.shelf = 0;
 }
 
 Book.prototype.read = function () {
   this.is_read = true;
+};
+
+Book.prototype.changeShelf = function (shelf_index) {
+  this.shelf = shelf_index;
 };
 
 function addBookToLibrary(title, author, number_of_pages, read = false) {
@@ -23,16 +28,21 @@ function addBookToLibrary(title, author, number_of_pages, read = false) {
   myLibrary.push(book);
 }
 
-function displayBooks() {
-  const shelf = document.getElementsByClassName("shelf")[0]; //TODO choose the best shelf
+function getBookFromID(id) {
+  return myLibrary.filter((b) => b.id == id)[0];
+}
 
-  while (shelf.firstChild) {
-    shelf.removeChild(shelf.lastChild);
+function displayBooks() {
+  for (let shelf of document.getElementsByClassName("shelf")) {
+    while (shelf.firstChild) {
+      shelf.removeChild(shelf.lastChild);
+    }
   }
 
   const action_book_div = document.getElementsByClassName("action-book")[0];
 
   myLibrary.forEach((b) => {
+    const shelf = document.getElementsByClassName("shelf")[b.shelf]; //TODO choose the best shelf
     let div_book = document.createElement("div");
     div_book.draggable = true;
     div_book.classList.add("book");
@@ -76,14 +86,16 @@ function handleAddBookEvent() {
 function handleDragEvents() {
   let shelfs = document.getElementsByClassName("shelf");
 
-  for (let s of shelfs) {
-    s.addEventListener("dragover", (e) => {
+  for (let i = 0; i < shelfs.length; i++) {
+    shelfs[i].addEventListener("dragover", (e) => {
       e.preventDefault();
     });
 
-    s.addEventListener("drop", (e) => {
+    shelfs[i].addEventListener("drop", (e) => {
       e.preventDefault();
-      s.appendChild(dragged_book);
+      let book = getBookFromID(dragged_book.dataset.bookId);
+      book.changeShelf(i);
+      shelfs[i].appendChild(dragged_book);
     });
   }
 
