@@ -1,27 +1,31 @@
 let myLibrary = [];
 let dragged_book;
 
-function Book(title, author, number_of_pages, read = false) {
-  if (!new.target) {
-    throw Error("You must use the 'new' operator to call the constructor");
+class Book {
+  #id;
+  constructor(title, author, number_of_pages, read = false) {
+    this.#id = crypto.randomUUID();
+    this.title = title;
+    this.author = author;
+    this.number_of_pages = number_of_pages;
+    this.is_read = read;
+    this.color =
+      "#" + (((1 << 24) * Math.random()) | 0).toString(16).padStart(6, "0");
+    this.shelf = 0;
   }
-  this.id = crypto.randomUUID();
-  this.title = title;
-  this.author = author;
-  this.number_of_pages = number_of_pages;
-  this.is_read = read;
-  this.color =
-    "#" + (((1 << 24) * Math.random()) | 0).toString(16).padStart(6, "0");
-  this.shelf = 0;
+
+  get id() {
+    return this.#id;
+  }
+
+  read() {
+    this.is_read = true;
+  }
+
+  changeShelf(shelf_index) {
+    this.shelf = shelf_index;
+  }
 }
-
-Book.prototype.read = function () {
-  this.is_read = true;
-};
-
-Book.prototype.changeShelf = function (shelf_index) {
-  this.shelf = shelf_index;
-};
 
 function addBookToLibrary(title, author, number_of_pages, read = false) {
   let book = new Book(title, author, number_of_pages, read);
